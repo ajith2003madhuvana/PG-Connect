@@ -70,4 +70,3 @@ The application implements a secure view-switching logic based on the authentica
 *   **Biometric Entry:** Link with IoT hardware for gate access logs.
 
 ---
-*Built with ❤️ by [Your Name]*
