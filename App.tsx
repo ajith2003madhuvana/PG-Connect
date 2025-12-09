@@ -1075,12 +1075,27 @@ const App: React.FC = () => {
                                <p className="font-medium text-slate-900">₹{fee.amount}</p>
                                <p className="text-xs text-slate-500">Due: {fee.due_date}</p>
                              </div>
-                             <span className={`px-2 py-1 rounded text-xs font-bold ${
-                               fee.status === 'PAID' ? 'bg-green-100 text-green-700' : 
-                               fee.status === 'PENDING' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'
-                             }`}>
-                               {fee.status}
-                             </span>
+                             <div className="flex items-center gap-3">
+                               <span className={`px-2 py-1 rounded text-xs font-bold ${
+                                 fee.status === 'PAID' ? 'bg-green-100 text-green-700' : 
+                                 fee.status === 'PENDING' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700'
+                               }`}>
+                                 {fee.status}
+                               </span>
+                               {(fee.status === 'PENDING' || fee.status === 'OVERDUE') && (
+                                  <button
+                                    onClick={() => {
+                                      if(confirm("Simulate Payment via UPI/Card?")) {
+                                        handleUpdateFeeStatus(fee.fee_id, PaymentStatus.PAID);
+                                        alert("Payment Successful!");
+                                      }
+                                    }}
+                                    className="px-3 py-1 bg-indigo-600 text-white text-xs rounded hover:bg-indigo-700 transition-colors"
+                                  >
+                                    Pay Now
+                                  </button>
+                               )}
+                             </div>
                            </div>
                          ))
                        ) : (
